@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://namkhammunn-boop.github.io/PDFlash/sitemap.xml
