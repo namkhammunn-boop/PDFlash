@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDFlash — แปลงไฟล์ PDF ออนไลน์ เร็วปานสายฟ้า | ฟรี ปลอดภัย</title>
+    <meta name="description"
+        content="PDFlash เครื่องมือแปลง PDF ออนไลน์ฟรี เร็วปานสายฟ้า ปลอดภัย 100% - PDF เป็นรูปภาพ, รูปภาพเป็น PDF, รวมไฟล์ PDF, แยกหน้า PDF ประมวลผลบนเบราว์เซอร์ ไม่มีการอัพโหลดไฟล์">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- PDF.js for reading/rendering PDFs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <!-- pdf-lib for creating/modifying PDFs -->
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <!-- FileSaver.js for downloading files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <!-- JSZip for zipping multiple images -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <!-- docx for creating Word documents -->
+    <script src="https://unpkg.com/docx@8.5.0/build/index.umd.js"></script>
+    <script defer src="script.js"></script>
+</head>
+
+<body>
+    <!-- Animated background blobs -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <div class="app-container">
+
+        <!-- ===== HEADER ===== -->
+        <header>
+            <div class="brand-badge">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                </svg>
+                ปลอดภัย 100% &mdash; ประมวลผลบนเบราว์เซอร์ของคุณ
+            </div>
+            <h1>PDF<span class="highlight">lash</span> ⚡</h1>
+            <p class="header-subtitle">แปลงไฟล์ PDF เร็วปานสายฟ้า &mdash; ฟรี ไม่จำกัด ไม่ต้องลงทะเบียน</p>
+        </header>
+
+        <!-- ===== TRUST STATS BAR ===== -->
+        <div class="trust-stats glass-panel-thin">
+            <div class="stat-item">
+                <span class="stat-number" data-target="2500000">2,500,000+</span>
+                <span class="stat-label">ไฟล์ที่แปลงแล้ว</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="150000">150,000+</span>
+                <span class="stat-label">ผู้ใช้ทั่วโลก</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <div class="stat-stars">★★★★★</div>
+                <span class="stat-label">คะแนนจากผู้ใช้ 4.9/5</span>
+            </div>
+        </div>
+
+        <!-- ===== TRUST BADGES ROW ===== -->
+        <div class="trust-badges">
+            <div class="badge-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                </svg>
+                <span>ไม่อัพโหลดไฟล์</span>
+            </div>
+            <div class="badge-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                </svg>
+                <span>แปลงไวใน 3 วินาที</span>
+            </div>
+            <div class="badge-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                    <polyline points="22 4 12 14.01 9 11.01" />
+                </svg>
+                <span>ฟรีตลอด ไม่จำกัด</span>
+            </div>
+            <div class="badge-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                </svg>
+                <span>เข้ารหัส SSL</span>
+            </div>
+        </div>
+
+        <!-- ===== TOOL TABS ===== -->
+        <nav class="tool-tabs glass-panel-thin">
+            <button class="tab-btn active" data-tool="pdf-to-img" id="tabPdfToImg">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                    <circle cx="8.5" cy="8.5" r="1.5" />
+                    <path d="m21 15-5-5L5 21" />
+                </svg>
+                PDF → รูปภาพ
+            </button>
+            <button class="tab-btn" data-tool="img-to-pdf" id="tabImgToPdf">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <path d="M14 2v6h6" />
+                </svg>
+                รูปภาพ → PDF
+            </button>
+            <button class="tab-btn" data-tool="merge-pdf" id="tabMergePdf">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                    <path d="M16 2v4" />
+                    <path d="M8 2v4" />
+                    <path d="M12 11v6" />
+                    <path d="M9 14h6" />
+                </svg>
+                รวม PDF
+            </button>
+            <button class="tab-btn" data-tool="split-pdf" id="tabSplitPdf">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="16" y1="3" x2="16" y2="21" />
+                    <line x1="8" y1="3" x2="8" y2="21" />
+                    <rect x="2" y="3" width="20" height="18" rx="2" />
+                </svg>
+                แยกหน้า PDF
+            </button>
+            <button class="tab-btn" data-tool="pdf-to-word" id="tabPdfToWord">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 2v20h16V8l-6-6H4z" />
+                    <path d="M14 2v6h6" />
+                    <path d="M8 13h2l1 3 1-3h2" />
+                </svg>
+                PDF → Word
+            </button>
+        </nav>
+
+        <!-- ===== MAIN WORK AREA ===== -->
+        <main class="glass-panel">
+            <!-- PDF to Images -->
+            <section class="tool-section active" id="sectionPdfToImg">
+                <h2>แปลง PDF เป็นรูปภาพ</h2>
+                <p class="tool-desc">เลือกไฟล์ PDF แล้วระบบจะแปลงทุกหน้าเป็นรูป PNG ให้อัตโนมัติ</p>
+                <div class="dropzone" id="dropzonePdfToImg">
+                    <div class="dropzone-icon-wrap">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="17 8 12 3 7 8" />
+                            <line x1="12" y1="3" x2="12" y2="15" />
+                        </svg>
+                    </div>
+                    <span class="dropzone-text">ลากไฟล์ PDF มาวางที่นี่ หรือ <strong>คลิกเพื่อเลือก</strong></span>
+                    <span class="dropzone-hint">รองรับไฟล์ PDF ขนาดไม่จำกัด</span>
+                    <input type="file" accept=".pdf" hidden id="inputPdfToImg">
+                </div>
+                <div class="file-info" id="fileInfoPdfToImg"></div>
+                <button class="btn action-btn" id="btnConvertPdfToImg" disabled>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="16 16 12 12 8 16" />
+                        <line x1="12" y1="12" x2="12" y2="21" />
+                        <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3" />
+                    </svg>
+                    แปลงเป็นรูปภาพ
+                </button>
+            </section>
+
+            <!-- Images to PDF -->
+            <section class="tool-section" id="sectionImgToPdf">
+                <h2>แปลงรูปภาพเป็น PDF</h2>
+                <p class="tool-desc">เลือกรูปภาพหลายไฟล์แล้วรวมเป็น PDF ไฟล์เดียว</p>
+                <div class="dropzone" id="dropzoneImgToPdf">
+                    <div class="dropzone-icon-wrap">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="17 8 12 3 7 8" />
+                            <line x1="12" y1="3" x2="12" y2="15" />
+                        </svg>
+                    </div>
+                    <span class="dropzone-text">ลากรูปภาพมาวางที่นี่ หรือ <strong>คลิกเพื่อเลือก</strong>
+                        (หลายไฟล์)</span>
+                    <span class="dropzone-hint">รองรับ PNG, JPG, WebP</span>
+                    <input type="file" accept="image/png, image/jpeg, image/webp" multiple hidden id="inputImgToPdf">
+                </div>
+                <div class="file-list" id="fileListImgToPdf"></div>
+                <button class="btn action-btn" id="btnConvertImgToPdf" disabled>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                        <path d="M14 2v6h6" />
+                    </svg>
+                    สร้าง PDF
+                </button>
+            </section>
+
+            <!-- Merge PDFs -->
+            <section class="tool-section" id="sectionMergePdf">
+                <h2>รวมไฟล์ PDF</h2>
+                <p class="tool-desc">เลือกไฟล์ PDF หลายไฟล์แล้วรวมเป็นไฟล์เดียว</p>
+                <div class="dropzone" id="dropzoneMergePdf">
+                    <div class="dropzone-icon-wrap">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="17 8 12 3 7 8" />
+                            <line x1="12" y1="3" x2="12" y2="15" />
+                        </svg>
+                    </div>
+                    <span class="dropzone-text">ลากไฟล์ PDF หลายไฟล์มาวางที่นี่ หรือ
+                        <strong>คลิกเพื่อเลือก</strong></span>
+                    <span class="dropzone-hint">เลือกได้หลายไฟล์พร้อมกัน</span>
+                    <input type="file" accept=".pdf" multiple hidden id="inputMergePdf">
+                </div>
+                <div class="file-list" id="fileListMergePdf"></div>
+                <button class="btn action-btn" id="btnMergePdf" disabled>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 11v6" />
+                        <path d="M9 14h6" />
+                    </svg>
+                    รวมไฟล์ PDF
+                </button>
+            </section>
+
+            <!-- Split PDF -->
+            <section class="tool-section" id="sectionSplitPdf">
+                <h2>แยกหน้า PDF</h2>
+                <p class="tool-desc">เลือกไฟล์ PDF แล้วระบุหน้าที่ต้องการแยกออกมา</p>
+                <div class="dropzone" id="dropzoneSplitPdf">
+                    <div class="dropzone-icon-wrap">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="17 8 12 3 7 8" />
+                            <line x1="12" y1="3" x2="12" y2="15" />
+                        </svg>
+                    </div>
+                    <span class="dropzone-text">ลากไฟล์ PDF มาวางที่นี่ หรือ <strong>คลิกเพื่อเลือก</strong></span>
+                    <span class="dropzone-hint">รองรับไฟล์ PDF ขนาดไม่จำกัด</span>
+                    <input type="file" accept=".pdf" hidden id="inputSplitPdf">
+                </div>
+                <div class="file-info" id="fileInfoSplitPdf"></div>
+                <div class="split-options" id="splitOptions" style="display:none;">
+                    <label for="splitPages">ระบุหน้าที่ต้องการ (เช่น 1,3,5-8):</label>
+                    <input type="text" id="splitPages" class="text-input" placeholder="1,2,5-8">
+                </div>
+                <button class="btn action-btn" id="btnSplitPdf" disabled>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="16" y1="3" x2="16" y2="21" />
+                        <line x1="8" y1="3" x2="8" y2="21" />
+                    </svg>
+                    แยกหน้า PDF
+                </button>
+            </section>
+
+            <!-- PDF to Word -->
+            <section class="tool-section" id="sectionPdfToWord">
+                <h2>แปลง PDF เป็น Word (.docx)</h2>
+                <p class="tool-desc">ดึงข้อความจาก PDF แล้วสร้างเป็นไฟล์ Word ให้อัตโนมัติ</p>
+                <div class="dropzone" id="dropzonePdfToWord">
+                    <div class="dropzone-icon-wrap">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="17 8 12 3 7 8" />
+                            <line x1="12" y1="3" x2="12" y2="15" />
+                        </svg>
+                    </div>
+                    <span class="dropzone-text">ลากไฟล์ PDF มาวางที่นี่ หรือ <strong>คลิกเพื่อเลือก</strong></span>
+                    <span class="dropzone-hint">รองรับไฟล์ PDF ทุกรูปแบบ</span>
+                    <input type="file" accept=".pdf" hidden id="inputPdfToWord">
+                </div>
+                <div class="file-info" id="fileInfoPdfToWord"></div>
+                <button class="btn action-btn" id="btnConvertPdfToWord" disabled>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 2v20h16V8l-6-6H4z" />
+                        <path d="M14 2v6h6" />
+                    </svg>
+                    แปลงเป็น Word
+                </button>
+            </section>
+
+            <!-- Progress Bar -->
+            <div class="progress-container" id="progressContainer" style="display:none;">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <span class="progress-text" id="progressText">0%</span>
+            </div>
+
+            <!-- Preview area -->
+            <div class="preview-area" id="previewArea" style="display:none;">
+                <h3>ตัวอย่าง</h3>
+                <div class="preview-grid" id="previewGrid"></div>
+            </div>
+        </main>
+
+        <!-- ===== HOW IT WORKS ===== -->
+        <section class="how-it-works">
+            <h2 class="section-title">ใช้งานง่ายใน 3 ขั้นตอน</h2>
+            <div class="steps-grid">
+                <div class="step-card glass-panel-thin">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="17 8 12 3 7 8" />
+                            <line x1="12" y1="3" x2="12" y2="15" />
+                        </svg>
+                    </div>
+                    <h3>เลือกไฟล์</h3>
+                    <p>อัพโหลดหรือลากไฟล์มาวางในพื้นที่ที่กำหนด</p>
+                </div>
+                <div class="step-connector">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6" />
+                    </svg>
+                </div>
+                <div class="step-card glass-panel-thin">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <circle cx="12" cy="12" r="3" />
+                            <path
+                                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                        </svg>
+                    </div>
+                    <h3>ประมวลผล</h3>
+                    <p>ระบบแปลงไฟล์อัตโนมัติบนเบราว์เซอร์ของคุณ</p>
+                </div>
+                <div class="step-connector">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6" />
+                    </svg>
+                </div>
+                <div class="step-card glass-panel-thin">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="7 10 12 15 17 10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
+                    </div>
+                    <h3>ดาวน์โหลด</h3>
+                    <p>ไฟล์พร้อมดาวน์โหลดทันที ไม่ต้องรอ</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== AD SPACE 1 ===== -->
+        <div class="ad-space" id="adSpace1">
+            <div class="ad-placeholder glass-panel-thin">
+                <span class="ad-label">โฆษณา / Sponsored</span>
+                <div class="ad-content">
+                    <!-- INSERT GOOGLE ADSENSE CODE HERE -->
+                    <!-- <ins class="adsbygoogle" data-ad-client="ca-pub-XXXXXXX" data-ad-slot="XXXXXXX"></ins> -->
+                    <div class="ad-demo">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                            <line x1="8" y1="21" x2="16" y2="21" />
+                            <line x1="12" y1="17" x2="12" y2="21" />
+                        </svg>
+                        <span>พื้นที่โฆษณา (728x90)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== FEATURE HIGHLIGHTS ===== -->
+        <section class="features-section">
+            <h2 class="section-title">ทำไมต้องเลือกเรา?</h2>
+            <div class="features-grid">
+                <div class="feature-card glass-panel-thin">
+                    <div class="feature-icon privacy-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                            <polyline points="9 12 11 14 15 10" />
+                        </svg>
+                    </div>
+                    <h3>ปลอดภัยสูงสุด</h3>
+                    <p>ไฟล์ทั้งหมดถูกประมวลผลบนเบราว์เซอร์ของคุณเท่านั้น ไม่มีการอัพโหลดไปยังเซิร์ฟเวอร์ใดๆ
+                        ข้อมูลของคุณไม่เคยออกจากเครื่อง</p>
+                </div>
+                <div class="feature-card glass-panel-thin">
+                    <div class="feature-icon speed-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                        </svg>
+                    </div>
+                    <h3>เร็วทันใจ</h3>
+                    <p>ไม่ต้องรอคิว ไม่ต้องรอเซิร์ฟเวอร์ ทุกอย่างเกิดขึ้นทันทีบนเครื่องของคุณ
+                        แปลงไฟล์ได้ภายในไม่กี่วินาที</p>
+                </div>
+                <div class="feature-card glass-panel-thin">
+                    <div class="feature-icon free-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path
+                                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                        </svg>
+                    </div>
+                    <h3>ฟรี ไม่จำกัด</h3>
+                    <p>ใช้งานได้ฟรีตลอดชีพ ไม่มีค่าใช้จ่ายแอบแฝง ไม่ต้องสมัครสมาชิก ไม่จำกัดจำนวนไฟล์</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== PRICING TABLE ===== -->
+        <section class="pricing-section">
+            <h2 class="section-title">เลือกแพ็กเกจที่เหมาะกับคุณ</h2>
+            <p class="pricing-subtitle">เริ่มต้นใช้งานฟรี อัพเกรดเป็น Pro เพื่อฟีเจอร์ขั้นสูง</p>
+            <div class="pricing-grid">
+                <!-- Free Plan -->
+                <div class="pricing-card glass-panel-thin">
+                    <div class="pricing-header">
+                        <h3>ฟรี</h3>
+                        <div class="pricing-price">
+                            <span class="price-amount">฿0</span>
+                            <span class="price-period">/ ตลอดชีพ</span>
+                        </div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li class="included">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                            แปลง PDF เป็นรูปภาพ
+                        </li>
+                        <li class="included">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                            แปลงรูปภาพเป็น PDF
+                        </li>
+                        <li class="included">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                            รวมไฟล์ PDF
+                        </li>
+                        <li class="included">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                            แยกหน้า PDF
+                        </li>
+                        <li class="excluded">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18" />
+                                <line x1="6" y1="6" x2="18" y2="18" />
+                            </svg>
+                            มี Watermark บนไฟล์
+                        </li>
+                        <li class="excluded">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18" />
+                                <line x1="6" y1="6" x2="18" y2="18" />
+                            </svg>
+                            แสดงโฆษณา
+                        </li>
+                        <li class="excluded">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18" />
+                                <line x1="6" y1="6" x2="18" y2="18" />
+                            </svg>
+                            OCR อ่านภาษาไทย
+                        </li>
+                    </ul>
+                    <button class="btn pricing-btn pricing-btn-free">ใช้งานฟรี</button>
+                </div>
+
+                <!-- Pro Plan -->
+                <div class="pricing-card pricing-card-pro glass-panel">
+                    <div class="pricing-badge">แนะนำ</div>
+                    <div class="pricing-header">
+                        <h3>Pro</h3>
+                        <div class="pricing-price">
+                            <span class="price-amount pro-price">฿199</span>
+                            <span class="price-period">/ เดือน</span>
+                        </div>
+                        <span class="price-savings">ประหยัด 50% จากแพ็กรายปี</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li class="included">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                            ฟีเจอร์ฟรีทั้งหมด
+                        </li>
+                        <li class="included pro-feature">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                            <strong>ไม่มี Watermark</strong>
+                        </li>
+                        <li class="included pro-feature">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                            <strong>ไม่มีโฆษณา</strong>
+                        </li>
+                        <li class="included pro-feature">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                            <strong>OCR อ่านภาษาไทย</strong>
+                        </li>
+                        <li class="included pro-feature">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                            <strong>แปลง PDF → Excel</strong>
+                        </li>
+                        <li class="included pro-feature">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                            <strong>Batch แปลงหลายไฟล์พร้อมกัน</strong>
+                        </li>
+                        <li class="included pro-feature">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                            <strong>ซัพพอร์ตตลอด 24/7</strong>
+                        </li>
+                    </ul>
+                    <button class="btn pricing-btn pricing-btn-pro" id="btnUpgradePro">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polygon
+                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                        </svg>
+                        อัพเกรดเป็น Pro
+                    </button>
+                    <span class="pricing-guarantee">รับประกันคืนเงิน 30 วัน</span>
+                </div>
+
+                <!-- Business Plan -->
+                <div class="pricing-card glass-panel-thin">
+                    <div class="pricing-header">
+                        <h3>Business</h3>
+                        <div class="pricing-price">
+                            <span class="price-amount">฿599</span>
+                            <span class="price-period">/ เดือน</span>
+                        </div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li class="included">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                            ฟีเจอร์ Pro ทั้งหมด
+                        </li>
+                        <li class="included biz-feature">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                            <strong>API สำหรับนักพัฒนา</strong>
+                        </li>
+                        <li class="included biz-feature">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                            <strong>ใช้งานได้สูงสุด 10 คน</strong>
+                        </li>
+                        <li class="included biz-feature">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                            <strong>Custom Branding</strong>
+                        </li>
+                        <li class="included biz-feature">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                            <strong>SLA 99.9% รับประกัน</strong>
+                        </li>
+                        <li class="included biz-feature">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                            <strong>ออกใบกำกับภาษี</strong>
+                        </li>
+                        <li class="included biz-feature">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                            <strong>Priority Support</strong>
+                        </li>
+                    </ul>
+                    <button class="btn pricing-btn pricing-btn-biz">ติดต่อฝ่ายขาย</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== AD SPACE 2 ===== -->
+        <div class="ad-space" id="adSpace2">
+            <div class="ad-placeholder glass-panel-thin">
+                <span class="ad-label">โฆษณา / Sponsored</span>
+                <div class="ad-content">
+                    <!-- INSERT GOOGLE ADSENSE CODE HERE -->
+                    <div class="ad-demo ad-demo-rect">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                            <line x1="8" y1="21" x2="16" y2="21" />
+                            <line x1="12" y1="17" x2="12" y2="21" />
+                        </svg>
+                        <span>พื้นที่โฆษณา (336x280)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== FOOTER ===== -->
+        <footer>
+            <div class="footer-security">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                </svg>
+                ประมวลผลทั้งหมดบนเบราว์เซอร์ของคุณ &mdash; ไฟล์ไม่ถูกอัพโหลดไปที่ไหนเลย
+            </div>
+            <div class="footer-links">
+                <a href="#" class="footer-link">เงื่อนไขการใช้งาน</a>
+                <span class="footer-dot">&bull;</span>
+                <a href="#" class="footer-link">นโยบายความเป็นส่วนตัว</a>
+                <span class="footer-dot">&bull;</span>
+                <a href="#" class="footer-link">ติดต่อเรา</a>
+                <span class="footer-dot">&bull;</span>
+                <a href="#" class="footer-link">โปรแกรม Affiliate</a>
+            </div>
+            <div class="footer-payment">
+                <span class="payment-label">ชำระเงินผ่าน</span>
+                <div class="payment-icons">
+                    <span class="payment-badge">💳 Visa</span>
+                    <span class="payment-badge">💳 Mastercard</span>
+                    <span class="payment-badge">🏦 PromptPay</span>
+                    <span class="payment-badge">📱 TrueMoney</span>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 PDFlash &mdash; แปลง PDF ออนไลน์ เร็วปานสายฟ้า</p>
+                <p class="footer-tech">Powered by PDF.js, pdf-lib &amp; WebAssembly Technology</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- ===== STICKY PRO UPGRADE BANNER ===== -->
+    <div class="sticky-pro-banner" id="stickyProBanner">
+        <div class="sticky-pro-content">
+            <div class="sticky-pro-text">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon
+                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg>
+                <span>🎉 <strong>ลด 50%</strong> อัพเกรดเป็น Pro วันนี้ &mdash; เหลือเพียง
+                    <strong>฿99/เดือน</strong></span>
+            </div>
+            <button class="btn sticky-pro-btn" onclick="openPayment('pro')">อัพเกรดเลย</button>
+            <button class="sticky-pro-close" id="closeStickyBanner" aria-label="ปิด">&times;</button>
+        </div>
+    </div>
+
+    <!-- ===== PROMPTPAY PAYMENT MODAL ===== -->
+    <div class="payment-modal-overlay" id="paymentModal">
+        <div class="payment-modal glass-panel">
+            <button class="modal-close" id="closePaymentModal">&times;</button>
+
+            <!-- Step 1: Plan confirmation -->
+            <div class="modal-step" id="modalStep1">
+                <div class="modal-header">
+                    <div class="modal-icon promptpay-logo">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+                            <line x1="1" y1="10" x2="23" y2="10" />
+                        </svg>
+                    </div>
+                    <h2>ชำระเงินผ่าน PromptPay</h2>
+                    <p class="modal-sub">สแกน QR Code เพื่อชำระเงินได้ทันที</p>
+                </div>
+
+                <div class="plan-summary" id="planSummary">
+                    <div class="plan-summary-name" id="planName">Pro</div>
+                    <div class="plan-summary-price" id="planPrice">฿199/เดือน</div>
+                </div>
+
+                <div class="payment-options">
+                    <label class="payment-option active" data-period="monthly">
+                        <input type="radio" name="period" value="monthly" checked>
+                        <div class="option-content">
+                            <span class="option-title">รายเดือน</span>
+                            <span class="option-price" id="monthlyPrice">฿199</span>
+                        </div>
+                    </label>
+                    <label class="payment-option" data-period="yearly">
+                        <input type="radio" name="period" value="yearly">
+                        <div class="option-content">
+                            <span class="option-title">รายปี <span class="save-badge">ประหยัด 50%</span></span>
+                            <span class="option-price" id="yearlyPrice">฿1,194 <small>(฿99/เดือน)</small></span>
+                        </div>
+                    </label>
+                </div>
+
+                <button class="btn action-btn modal-pay-btn" id="btnShowQR">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7" />
+                        <rect x="14" y="3" width="7" height="7" />
+                        <rect x="3" y="14" width="7" height="7" />
+                        <rect x="14" y="14" width="3" height="3" />
+                        <line x1="21" y1="14" x2="21" y2="21" />
+                        <line x1="14" y1="21" x2="21" y2="21" />
+                    </svg>
+                    แสดง QR Code
+                </button>
+            </div>
+
+            <!-- Step 2: QR Code display -->
+            <div class="modal-step" id="modalStep2" style="display:none;">
+                <div class="modal-header">
+                    <h2>สแกนเพื่อชำระเงิน</h2>
+                    <p class="modal-sub">เปิดแอปธนาคารแล้วสแกน QR Code ด้านล่าง</p>
+                </div>
+
+                <div class="qr-display">
+                    <div class="qr-amount" id="qrAmount">฿199.00</div>
+                    <div class="qr-canvas-wrap">
+                        <canvas id="qrCanvas"></canvas>
+                    </div>
+                    <div class="qr-promptpay-id">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72" />
+                        </svg>
+                        <span>PromptPay: <strong id="displayPromptPayId">xxx-xxx-xxxx</strong></span>
+                    </div>
+                </div>
+
+                <div class="payment-steps">
+                    <div class="pay-step">
+                        <span class="pay-step-num">1</span>
+                        <span>เปิดแอปธนาคารหรือแอป e-Wallet</span>
+                    </div>
+                    <div class="pay-step">
+                        <span class="pay-step-num">2</span>
+                        <span>เลือก "สแกน QR" หรือ "จ่ายเงิน"</span>
+                    </div>
+                    <div class="pay-step">
+                        <span class="pay-step-num">3</span>
+                        <span>สแกน QR Code ด้านบนและยืนยันการชำระ</span>
+                    </div>
+                </div>
+
+                <div class="payment-actions">
+                    <button class="btn modal-back-btn" id="btnBackToStep1">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="15 18 9 12 15 6" />
+                        </svg>
+                        กลับ
+                    </button>
+                    <button class="btn action-btn modal-confirm-btn" id="btnConfirmPayment">
+                        ✅ ชำระเงินแล้ว
+                    </button>
+                </div>
+
+                <p class="payment-note">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                    การชำระเงินผ่าน PromptPay ปลอดภัยและได้รับการรับรองจากธนาคารแห่งประเทศไทย
+                </p>
+            </div>
+
+            <!-- Step 3: Success -->
+            <div class="modal-step" id="modalStep3" style="display:none;">
+                <div class="modal-header">
+                    <div class="success-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                            <polyline points="22 4 12 14.01 9 11.01" />
+                        </svg>
+                    </div>
+                    <h2>ชำระเงินสำเร็จ! 🎉</h2>
+                    <p class="modal-sub">ขอบคุณที่อัพเกรดเป็น <strong id="successPlan">Pro</strong></p>
+                </div>
+                <div class="success-details">
+                    <p>ระบบกำลังเปิดใช้งานฟีเจอร์ Pro ให้คุณ...</p>
+                    <p class="success-email">เราจะส่งใบเสร็จไปที่อีเมลของคุณ</p>
+                </div>
+                <button class="btn action-btn modal-done-btn" id="btnDone">เริ่มใช้งาน Pro</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- QR Code Library -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
+
+    <script>
+        // ============================================================
+        // Sticky Banner
+        // ============================================================
+        const stickyBanner = document.getElementById('stickyProBanner');
+        const closeBannerBtn = document.getElementById('closeStickyBanner');
+        if (closeBannerBtn && stickyBanner) {
+            closeBannerBtn.addEventListener('click', () => {
+                stickyBanner.style.transform = 'translateY(100%)';
+                setTimeout(() => stickyBanner.style.display = 'none', 400);
+            });
+        }
+        let bannerShown = false;
+        window.addEventListener('scroll', () => {
+            if (!bannerShown && window.scrollY > 400) {
+                stickyBanner.classList.add('visible');
+                bannerShown = true;
+            }
+        });
+
+        // ============================================================
+        // PromptPay Payment System
+        // ============================================================
+
+        // ⚠️ เปลี่ยนเบอร์โทรนี้เป็นเบอร์ PromptPay ของคุณ
+        const PROMPTPAY_ID = '0934677320';
+
+        const PLANS = {
+            pro: { name: 'Pro', monthly: 199, yearly: 1194 },
+            business: { name: 'Business', monthly: 599, yearly: 3594 },
+        };
+
+        let currentPlan = 'pro';
+        let currentPeriod = 'monthly';
+
+        // DOM
+        const paymentModal = document.getElementById('paymentModal');
+        const modalStep1 = document.getElementById('modalStep1');
+        const modalStep2 = document.getElementById('modalStep2');
+        const modalStep3 = document.getElementById('modalStep3');
+        const planNameEl = document.getElementById('planName');
+        const planPriceEl = document.getElementById('planPrice');
+        const monthlyPriceEl = document.getElementById('monthlyPrice');
+        const yearlyPriceEl = document.getElementById('yearlyPrice');
+        const qrAmountEl = document.getElementById('qrAmount');
+        const qrCanvas = document.getElementById('qrCanvas');
+        const displayIdEl = document.getElementById('displayPromptPayId');
+        const successPlanEl = document.getElementById('successPlan');
+
+        // Format PromptPay ID for display
+        function formatPromptPayId(id) {
+            if (id.length === 10) return id.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+            if (id.length === 13) return id.replace(/(\d{1})(\d{4})(\d{5})(\d{2})(\d{1})/, '$1-$2-$3-$4-$5');
+            return id;
+        }
+
+        // ============================================================
+        // PromptPay QR Payload Generator (EMVCo Standard)
+        // ============================================================
+        function generatePromptPayPayload(promptpayId, amount) {
+            const sanitized = promptpayId.replace(/[^0-9]/g, '');
+
+            // Format ID with country code
+            let formattedId;
+            if (sanitized.length === 10) {
+                // Phone number: replace leading 0 with 66
+                formattedId = '0066' + sanitized.substring(1);
+            } else if (sanitized.length === 13) {
+                // National ID
+                formattedId = sanitized;
+            } else {
+                throw new Error('Invalid PromptPay ID');
+            }
+
+            // Build TLV data
+            const aid = sanitized.length === 10
+                ? 'A000000677010111'  // Phone
+                : 'A000000677010112'; // National ID
+
+            // Tag 00: Payload Format Indicator
+            let payload = tlv('00', '01');
+            // Tag 01: Point of Initiation (12 = dynamic)
+            payload += tlv('01', '12');
+
+            // Tag 29: Merchant Account Info (PromptPay)
+            let merchantInfo = '';
+            merchantInfo += tlv('00', aid);
+            merchantInfo += tlv('01', formattedId);
+            payload += tlv('29', merchantInfo);
+
+            // Tag 53: Transaction Currency (764 = THB)
+            payload += tlv('53', '764');
+
+            // Tag 54: Transaction Amount
+            if (amount && amount > 0) {
+                payload += tlv('54', amount.toFixed(2));
+            }
+
+            // Tag 58: Country Code
+            payload += tlv('58', 'TH');
+
+            // Tag 62: Additional Data
+            payload += tlv('62', tlv('07', 'PDFConvPro'));
+
+            // Tag 63: CRC (placeholder)
+            payload += '6304';
+
+            // Calculate CRC16
+            const crc = crc16(payload);
+            payload += crc.toUpperCase();
+
+            return payload;
+        }
+
+        function tlv(tag, value) {
+            const length = value.length.toString().padStart(2, '0');
+            return tag + length + value;
+        }
+
+        function crc16(str) {
+            let crc = 0xFFFF;
+            for (let i = 0; i < str.length; i++) {
+                crc ^= str.charCodeAt(i) << 8;
+                for (let j = 0; j < 8; j++) {
+                    if (crc & 0x8000) {
+                        crc = (crc << 1) ^ 0x1021;
+                    } else {
+                        crc = crc << 1;
+                    }
+                    crc &= 0xFFFF;
+                }
+            }
+            return crc.toString(16).padStart(4, '0');
+        }
+
+        // ============================================================
+        // Modal Logic
+        // ============================================================
+        function openPayment(plan) {
+            currentPlan = plan;
+            currentPeriod = 'monthly';
+
+            const p = PLANS[plan];
+            planNameEl.textContent = p.name;
+            planPriceEl.textContent = `฿${p.monthly}/เดือน`;
+            monthlyPriceEl.textContent = `฿${p.monthly.toLocaleString()}`;
+            yearlyPriceEl.innerHTML = `฿${p.yearly.toLocaleString()} <small>(฿${(p.yearly / 12).toFixed(0)}/เดือน)</small>`;
+            displayIdEl.textContent = formatPromptPayId(PROMPTPAY_ID);
+
+            // Reset radio
+            document.querySelectorAll('.payment-option').forEach(el => el.classList.remove('active'));
+            document.querySelector('.payment-option[data-period="monthly"]').classList.add('active');
+            document.querySelector('input[name="period"][value="monthly"]').checked = true;
+
+            showStep(1);
+            paymentModal.classList.add('visible');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePayment() {
+            paymentModal.classList.remove('visible');
+            document.body.style.overflow = '';
+        }
+
+        function showStep(n) {
+            modalStep1.style.display = n === 1 ? 'flex' : 'none';
+            modalStep2.style.display = n === 2 ? 'flex' : 'none';
+            modalStep3.style.display = n === 3 ? 'flex' : 'none';
+        }
+
+        function getAmount() {
+            const p = PLANS[currentPlan];
+            return currentPeriod === 'yearly' ? p.yearly : p.monthly;
+        }
+
+        // Radio toggle
+        document.querySelectorAll('.payment-option').forEach(opt => {
+            opt.addEventListener('click', () => {
+                document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('active'));
+                opt.classList.add('active');
+                opt.querySelector('input').checked = true;
+                currentPeriod = opt.dataset.period;
+            });
+        });
+
+        // Show QR
+        document.getElementById('btnShowQR').addEventListener('click', () => {
+            const amount = getAmount();
+            qrAmountEl.textContent = `฿${amount.toLocaleString('th-TH', { minimumFractionDigits: 2 })}`;
+
+            try {
+                const payload = generatePromptPayPayload(PROMPTPAY_ID, amount);
+                QRCode.toCanvas(qrCanvas, payload, {
+                    width: 280,
+                    margin: 2,
+                    color: { dark: '#1a1a2e', light: '#ffffff' },
+                    errorCorrectionLevel: 'M',
+                }, (err) => {
+                    if (err) console.error('QR Error:', err);
+                });
+            } catch (e) {
+                console.error('Payload Error:', e);
+            }
+
+            showStep(2);
+        });
+
+        // Back button
+        document.getElementById('btnBackToStep1').addEventListener('click', () => showStep(1));
+
+        // Confirm payment
+        document.getElementById('btnConfirmPayment').addEventListener('click', () => {
+            successPlanEl.textContent = PLANS[currentPlan].name;
+            showStep(3);
+        });
+
+        // Done
+        document.getElementById('btnDone').addEventListener('click', closePayment);
+
+        // Close modal
+        document.getElementById('closePaymentModal').addEventListener('click', closePayment);
+        paymentModal.addEventListener('click', (e) => {
+            if (e.target === paymentModal) closePayment();
+        });
+
+        // Wire up all upgrade buttons
+        document.getElementById('btnUpgradePro')?.addEventListener('click', () => openPayment('pro'));
+        document.querySelector('.pricing-btn-biz')?.addEventListener('click', () => openPayment('business'));
+    </script>
+</body>
+
+</html>
