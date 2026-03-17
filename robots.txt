@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://namkhammunn-boop.github.io/PDFlash/sitemap.xml
+Sitemap: https://pdflash.netlify.app/sitemap.xml
